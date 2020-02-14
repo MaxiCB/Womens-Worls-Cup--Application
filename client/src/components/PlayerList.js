@@ -6,6 +6,7 @@ import { Table } from 'reactstrap';
 
 const PlayerList = (props) => {
 
+    let players = props.players == null || undefined ? [] : props.players
     return (
         <div>
             <Link to={'/graph'}>Graph</Link>
@@ -18,7 +19,7 @@ const PlayerList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.players.map((item) => {
+                    {players.map((item) => {
                         return <tr><th>{item.id}</th><td>{item.name}</td><td>{item.country}</td></tr>
                     })}
                 </tbody>

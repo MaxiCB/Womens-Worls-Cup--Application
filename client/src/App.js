@@ -5,13 +5,17 @@ import {Route, BrowserRouter as Router} from 'react-router-dom';
 import axios from 'axios';
 // Custom Hooks
 import { useLocalStorage} from './hooks/useLocalStorage';
+import { useFetch } from './hooks/useFetch';
 // Components
 import PlayerList from './components/PlayerList';
+import PlayerGraph from './components/PlayerGraph';
 
+const App = ({url}) => {
 
-const App = () => {
+  const [playerData, setPlayerData] = useLocalStorage('players', []);
 
-  const [playerData, setPlayerData] = useLocalStorage('players', null);
+  // const data = useFetch('http://localhost:5000/api/players', {})
+  // setPlayerData(data.response)
 
   useEffect(() => {
     // Implement axios call here
@@ -26,6 +30,7 @@ const App = () => {
       <div className="App">
         {/* Implement routes here as needed */}
         <Route exact path='/' render={(props) => <PlayerList players={playerData}/>}/>
+        <Route exact path='/graph' render={(props) => <PlayerGraph players={playerData}/>}/>
       </div>
     </Router>
   );
